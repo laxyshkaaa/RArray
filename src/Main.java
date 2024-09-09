@@ -9,20 +9,15 @@ public class Main {
     public static final int HASH_SIZE = 1000;
     // Максимальное значение элементов в последовательности
     public static final int MAX_VALUE = 10000;
-
     public static void main(String[] args) {
         Random random = new Random();
-
-
-
 
         // HashSet для хранения уникальных элементов последовательности
         HashSet<Integer> Numbers = new HashSet<>();
         // Заполняем HashSet для быстрого поиска
         while (Numbers.size() < HASH_SIZE) {
-            Numbers.add(random.nextInt(1,10001)); // Добавляем случайное число от 1 до 10000
+            Numbers.add(random.nextInt(1,MAX_VALUE)); // Добавляем случайное число от 1 до 10000
         }
-
         // Максимальное число, котор кратно 14 и является произведением двух различных чисел
         int maxR = -1;
 
@@ -31,10 +26,10 @@ public class Main {
             // Проверяем только те числа, которые кратны 14
             if (num % DIVISOR == 0) {
                 // Для каждого такого числа пытаемся найти два различных множителя
-                for (int factor1 : Numbers) {
-                    if (num % factor1 == 0) {  // Если num делится на factor1
-                        int factor2 = num / factor1;  // Вычисляем второй множитель
-                        if (factor1 != factor2 && Numbers.contains(factor2)) {  // Проверяем, что это разные числа и оба в последовательности
+                for (int multiply1 : Numbers) {
+                    if (num % multiply1 == 0) {  // Если num делится на factor1 без осткка
+                        int multiply2 = num / multiply1;  // Вычисляем второй множитель
+                        if (Numbers.contains(multiply2)) {  // Проверяем, что числа оба есть в последовательности
                             maxR = Math.max(maxR, num);  // Обновляем максимальное значение
                             break;  // НАЙДЯ ЧТО НАМ НАДО ВЫХОДИМ ИЗ ВНУТРЕННЕГО ЦИКЛА
                         }
